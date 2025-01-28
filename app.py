@@ -3,9 +3,9 @@ from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate
 from langchain_core.prompts import ChatPromptTemplate
-import re
-
+import re  
 st.set_page_config(layout="wide")
+
 st.title("🤖Chatbot powered by DeepSeek R1")
 
 # Initialize the model
@@ -14,7 +14,7 @@ model = ChatOllama(model=model_name, base_url="http://localhost:11434")
 
 # System message initialization with escaped curly braces
 system_message = SystemMessagePromptTemplate.from_template(
-    "You are a helpful AI assistant who helps users with any question or task they have."
+    "You are a helpful AI assistant who helps users with any question or task they have. The node value is {{node.val}}."
 )
 
 # Initialize chat history in session state
@@ -67,8 +67,9 @@ if prompt := st.chat_input("Type your message here..."):
             chat_template = ChatPromptTemplate.from_messages(chat_history)
             chain = chat_template | model | StrOutputParser()
 
-            # Generate the response
-            response = chain.invoke({})
+            # Pass dynamic variables if required
+            # Add variables here if you expect placeholders (e.g., {"node.val": "value"})
+            response = chain.invoke({"node.val": "example value"})
 
             # Chunk the response logically
             response_chunks = chunk_response(response)
