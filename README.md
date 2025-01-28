@@ -52,7 +52,7 @@ A demo video of the application is available: [DeepSeek R1 Chatbot Demo](https:/
    ```
 4. Ensure the Ollama model is running locally. Start the DeepSeek R1 model
    ```bash
-   ollama serve deepseek-r1:8b
+   ollama run deepseek-r1:8b
    ```
 5. Run the Streamlit app
    ```bash
